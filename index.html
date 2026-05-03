@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reservas Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,800;1,9..144,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <div class="brand-mark">
+      <svg viewBox="0 0 40 40" width="36" height="36" aria-hidden="true">
+        <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="20" cy="20" r="11" fill="none" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="20" y1="2" x2="20" y2="38" stroke="currentColor" stroke-width="1.2"/>
+        <line x1="2" y1="20" x2="38" y2="20" stroke="currentColor" stroke-width="1.2"/>
+        <circle cx="20" cy="20" r="2.5" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="brand-text">
+      <h1>Reservas Lab</h1>
+      <p class="brand-sub">Sistema de bloques · 30 min</p>
+    </div>
+  </div>
+
+  <div class="user-area">
+    <label class="user-label" for="userSelect">Estás reservando como</label>
+    <select id="userSelect" class="user-select">
+      <option value="">— Selecciona tu nombre —</option>
+    </select>
+    <button id="myReservationsBtn" class="ghost-btn" disabled title="Selecciona tu nombre primero">
+      Mis reservas <span id="myCount" class="count-badge">0</span>
+    </button>
+  </div>
+</header>
+
+<nav class="datebar">
+  <button class="nav-btn" id="prevDay" aria-label="Día anterior">
+    <svg viewBox="0 0 24 24" width="20" height="20"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <div class="date-display">
+    <span class="date-weekday" id="dateWeekday">—</span>
+    <span class="date-full" id="dateFull">—</span>
+  </div>
+
+  <button class="nav-btn" id="nextDay" aria-label="Día siguiente">
+    <svg viewBox="0 0 24 24" width="20" height="20"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+
+  <input type="date" id="datePicker" class="date-picker" />
+  <button class="ghost-btn small" id="todayBtn">Hoy</button>
+
+  <div class="legend">
+    <span class="legend-item"><span class="dot dot-free"></span>Libre</span>
+    <span class="legend-item"><span class="dot dot-mine"></span>Tuya</span>
+    <span class="legend-item"><span class="dot dot-other"></span>Ocupada</span>
+  </div>
+
+  <div class="conn-state" id="connState">
+    <span class="conn-dot"></span><span id="connText">conectando…</span>
+  </div>
+</nav>
+
+<main class="grid-wrap">
+  <div class="grid-scroll">
+    <table class="grid" id="grid">
+      <thead>
+        <tr id="gridHeader"><th class="time-col">Hora</th></tr>
+      </thead>
+      <tbody id="gridBody"></tbody>
+    </table>
+  </div>
+</main>
+
+<!-- Modal de confirmación -->
+<div class="modal" id="modal" hidden>
+  <div class="modal-card">
+    <h3 id="modalTitle">Reservar</h3>
+    <p id="modalText">—</p>
+    <div class="modal-meta" id="modalMeta"></div>
+    <div class="modal-actions">
+      <button class="ghost-btn" id="modalCancel">Cancelar</button>
+      <button class="primary-btn" id="modalConfirm">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Drawer "Mis reservas" -->
+<aside class="drawer" id="drawer" hidden>
+  <div class="drawer-head">
+    <h3>Mis reservas</h3>
+    <button class="ghost-btn small" id="drawerClose">Cerrar</button>
+  </div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+<div class="drawer-backdrop" id="drawerBackdrop" hidden></div>
+
+<!-- Toast -->
+<div class="toast" id="toast" hidden></div>
+
+<!-- Firebase + app -->
+<script type="module" src="app.js"></script>
+</body>
+</html>
